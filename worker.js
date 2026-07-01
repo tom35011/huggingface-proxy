@@ -1,6 +1,6 @@
 export default {
   async fetch(request) {
-    const url = "https://api-inference.huggingface.co/models/meta-llama/Llama-3-8B-Instruct";
+    const url = "https://api-inference.huggingface.co/models/google/gemma-2-2b-it";
 
     const body = await request.json();
 
