@@ -1,7 +1,17 @@
 export default {
   async fetch(request) {
-    const url = "https://api-inference.huggingface.co/models/google/gemma-2-2b-it";
 
+    if (request.method === "OPTIONS") {
+      return new Response(null, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Methods": "POST, OPTIONS"
+        }
+      });
+    }
+
+    const url = "https://api-inference.huggingface.co/models/google/gemma-2-2b-it";
     const body = await request.json();
 
     const response = await fetch(url, {
@@ -14,8 +24,14 @@ export default {
     });
 
     const result = await response.json();
+
     return new Response(JSON.stringify(result), {
-      headers: { "Content-Type": "application/json" }
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS"
+      }
     });
   }
 };
